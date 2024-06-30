@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+# from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djangoflutterwave",
+    "cart",
+    "shop",
+    "order",
+    "payment",
 ]
 
 MIDDLEWARE = [
@@ -63,6 +69,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "cart.context_processors.cart",
             ],
         },
     },
@@ -117,8 +124,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+
+    os.path.join(BASE_DIR, "static"),
+]
+MEDIA_URL = "media/"
+MEDIA_ROOT = os.path.join(BASE_DIR / "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CART_SESSION_ID= "cart"
+
+PAYSTACK_SECRET_KEY = "sk_test_51d57be0169c67ebb2c222aa16f2183338465d96"
+PAYSTACK_PUBLIC_KEYM= "pk_test_fb7b4e7059cfbaaeb4db3a92ce0f3943fecda8bb"
